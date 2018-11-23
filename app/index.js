@@ -1,16 +1,30 @@
 const express = require('express')
 const app = express()
-const port = 8080
-const root_dir = '/home/artem/temp/Projects/light'
+const in_port = 8080
+const max_time = 300000
+var last_time = new Date (0)
 
 app.get('/', (request, response) => {
-    response.sendFile('/html/light.html', { root: root_dir })
+    if (new Date().getTime() - last_time.getTime() < max_time)
+    {
+        response.sendFile('/html/light.html', { root: __dirname })
+    }
+    else
+    {
+        response.sendFile('/html/no_light.html', { root: __dirname})
+    }
 })
 
-app.listen(port, (err) => {
-    if (err) {
+app.get('/renew', (request, response) => {
+    last_time = new Date()
+    response.send('Done!')
+})
+
+app.listen(in_port, (err) => {
+    if (err) 
+    {
         return console.log('something bad happened', err)
     }
 
-    console.log(`server is listening on ${port}`)
+    console.log(`server is listening on ${in_port}`)
 })
