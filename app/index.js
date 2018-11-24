@@ -1,8 +1,11 @@
 const express = require('express')
 const app = express()
+const secure = require('ssl-express-www');
 const port = process.env.PORT || 3000
 const max_time = 300000
 var last_time = new Date (0)
+
+app.use(secure)
 
 app.get('/', (request, response) => {
     if (new Date().getTime() - last_time.getTime() < max_time)
