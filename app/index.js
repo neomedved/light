@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const bodyParser = require("body-parser")
+const urlencodedParser = bodyParser.urlencoded({extended: false})
 const secure = require('ssl-express-www')
 const hash = require('sha256')
 const port = process.env.PORT || 3000
@@ -20,7 +21,7 @@ app.get('/', (request, response) => {
     }
 })
 
-app.post("/renew", bodyParser, (request, response) => {
+app.post("/renew", urlencodedParser, (request, response) => {
     if (!request.body)
     {
         return response.sendStatus(400)
