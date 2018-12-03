@@ -1,6 +1,8 @@
 const express = require('express')
 const app = express()
-const secure = require('ssl-express-www');
+const bodyParser = require("body-parser")
+const secure = require('ssl-express-www')
+const hash = require('sha256')
 const port = process.env.PORT || 3000
 const max_time = 300000
 var last_time = new Date (0)
@@ -18,9 +20,20 @@ app.get('/', (request, response) => {
     }
 })
 
-app.get('/renew', (request, response) => {
-    last_time = new Date()
-    response.send('Done!')
+app.post("/renew", bodyParser, (request, response) => {
+    if (!request.body)
+    {
+        return response.sendStatus(400)
+    }
+    if (hash(request.body.pass) === 'a27129a74cfc7e0441cacdec75a913e2824d770d797970014cfc6a75dec633bf')
+    {
+        last_time = new Date()
+        response.send('Done!')
+    }
+    else
+    {
+        response.send('Fail!')
+    }
 })
 
 app.listen(port, (err) => {
