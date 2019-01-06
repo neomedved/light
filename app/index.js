@@ -4,6 +4,9 @@ const bodyParser = require("body-parser")
 const urlencodedParser = bodyParser.urlencoded({extended: false})
 const secure = require('ssl-express-www')
 const hash = require('sha256')
+const fs = require('fs')
+const no_light_top = fs.readFileSync(__dirname + '/html/no_light_top.html', 'utf-8')
+const no_light_bottom = fs.readFileSync(__dirname + '/html/no_light_bottom.html', 'utf-8')
 const port = process.env.PORT || 3000
 const max_time = 300000
 var last_time = new Date (0)
@@ -17,7 +20,8 @@ app.get('/', (request, response) => {
     }
     else
     {
-        response.sendFile('/html/no_light.html', { root: __dirname})
+        response.send(no_light_top + last_time.toLocaleString('ru-RU') + no_light_bottom)
+        //response.sendFile('/html/no_light.html', { root: __dirname})
     }
 })
 
