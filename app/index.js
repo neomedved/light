@@ -20,7 +20,7 @@ app.get('/', (request, response) => {
     }
     else
     {
-        response.send(no_light_top + last_time.toLocaleString('ru-RU') + no_light_bottom)
+        response.send(no_light_top + last_time.toLocaleString('ru-RU', { hour12: false }) + no_light_bottom)
         //response.sendFile('/html/no_light.html', { root: __dirname})
     }
 })
