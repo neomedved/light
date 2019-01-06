@@ -20,7 +20,14 @@ app.get('/', (request, response) => {
     }
     else
     {
-        response.send(no_light_top + last_time.toLocaleString('ru-RU', { hour12: false }) + no_light_bottom)
+        response.send(
+            no_light_top
+            + last_time.toLocaleDateString('ru-RU', { day: '2-digit'}) + '.'
+            + last_time.toLocaleDateString('ru-RU', { month: '2-digit' }) + '.'
+            + last_time.getFullYear().toString() + ', ' 
+            + last_time.toLocaleDateString('ru-RU', { weekday: 'long' }) + ', '
+            + last_time.toLocaleTimeString('ru-RU', { hour12: false })
+            + no_light_bottom)
         //response.sendFile('/html/no_light.html', { root: __dirname})
     }
 })
