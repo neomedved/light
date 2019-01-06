@@ -25,7 +25,7 @@ app.get('/', (request, response) => {
             + last_time.toLocaleDateString('ru', { day: '2-digit'}) + '.'
             + last_time.toLocaleDateString('ru', { month: '2-digit' }) + '.'
             + last_time.getFullYear().toString() + ', ' 
-            + last_time.toLocaleDateString('ru', { weekday: 'long' }) + ', '
+            /*+ last_time.toLocaleDateString('ru', { weekday: 'long' }) + ', '*/
             + last_time.toLocaleTimeString('ru', { hour12: false })
             + no_light_bottom)
         //response.sendFile('/html/no_light.html', { root: __dirname})
