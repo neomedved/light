@@ -17,7 +17,7 @@ app.use('/static', express.static('app/html'))
 app.get('/', (request, response) => {
     if (new Date().getTime() - last_time.getTime() < max_time)
     {
-        response.sendFile('light.html'/*, { root: __dirname }*/)
+        response.sendFile('/static/light.html'/*, { root: __dirname }*/)
     }
     else
     {
