@@ -12,11 +12,12 @@ const max_time = 300000
 var last_time = new Date (0)
 
 app.use(secure)
+app.use('/static', express.static('app/html'))
 
 app.get('/', (request, response) => {
     if (new Date().getTime() - last_time.getTime() < max_time)
     {
-        response.sendFile('/html/light.html', { root: __dirname })
+        response.sendFile('light.html'/*, { root: __dirname }*/)
     }
     else
     {
@@ -24,11 +25,11 @@ app.get('/', (request, response) => {
             no_light_top
             + last_time.toLocaleDateString('ru', { day: '2-digit'}) + '.'
             + last_time.toLocaleDateString('ru', { month: '2-digit' }) + '.'
-            + last_time.getFullYear().toString() + ', ' 
+            + last_time.getFullYear().toString() + ' в ' 
             /*+ last_time.toLocaleDateString('ru', { weekday: 'long' }) + ', '*/
-            + last_time.toLocaleTimeString('ru', { hour12: false })
+            + last_time.toLocaleTimeString('ru', { hour12: false, hour: '2-digit', minute: '2-digit' })
             + no_light_bottom)
-        //response.sendFile('/html/no_light.html', { root: __dirname})
+        //response.sendFile('/html/light.html', { root: __dirname})
     }
 })
 
